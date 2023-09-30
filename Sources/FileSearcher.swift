@@ -8,11 +8,8 @@
 import Foundation
 
 protocol FileSearcher {
-    
-    associatedtype F: File
-    
     var fileManager: FileManager {get}
-    func startSearching(from path: String) -> Array<F>
+    func startSearching(from path: String) -> Array<File>
 }
 
 extension FileSearcher {
