@@ -24,9 +24,3 @@ class ObjectReference {
     }
 }
 
-class WeakBox<T:AnyObject> {
-    weak var value: T?
-    init(value: T?) {
-        self.value = value
-    }
-}
