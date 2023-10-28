@@ -9,7 +9,7 @@ import Foundation
 
 protocol FileSearcher {
     var fileManager: FileManager {get}
-    func startSearching(from path: String) -> Array<File>
+    func startSearching(from path: String?) -> Array<File>
 }
 
 extension FileSearcher {

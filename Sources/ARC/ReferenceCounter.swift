@@ -17,7 +17,6 @@ class ReferenceCounter {
             objectReferences.append(objectReference)
             for object in objects where searchedObject.name != object.name {
                 for codeBlock in object.codeBlocks {
-//                    if codeBlock.concatenatedLines.contains(searchedObject.name) {
                     if isSentence(codeBlock.concatenatedLines, contains: searchedObject.name) {
                         objectReference.add(reference: object)
                         break

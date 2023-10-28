@@ -8,14 +8,14 @@
 import Foundation
 
 class CodeBlock {
-    var name: String
+    var metadata: CodeBlockMetadata
     var lines: Array<String> = []
     lazy var concatenatedLines: String = {
         return lines.joined(separator: " ")
     }()
     
-    init(name: String) {
-        self.name = name
+    init(metadata: CodeBlockMetadata) {
+        self.metadata = metadata
     }
     
     func addLine(_ line: String) {

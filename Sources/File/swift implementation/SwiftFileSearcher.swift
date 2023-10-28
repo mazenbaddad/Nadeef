@@ -15,7 +15,8 @@ class SwiftFileSearcher: FileSearcher {
         self.fileManager = fileManager
     }
     
-    func startSearching(from path: String = FileManager.default.currentDirectoryPath) -> Array<File> {
+    func startSearching(from path: String?) -> Array<File> {
+        let path = path ?? FileManager.default.currentDirectoryPath
         var swiftFiles: Array<File> = []
         do {
             let files = try fileManager.contentsOfDirectory(atPath: path)
