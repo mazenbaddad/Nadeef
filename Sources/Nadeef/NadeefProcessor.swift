@@ -21,7 +21,7 @@ class NadeefProcessor {
         print("TOTAL FILES COUNT ", files.count)
         
         let swiftFileReader = SwiftFileReader()
-        let objectCollector = ObjectCollector(fileReader: swiftFileReader)
+        let objectCollector = SwiftObjectCollector(fileReader: swiftFileReader, configuration: configuration)
         
         let referenceCounter = ReferenceCounter()
         var objectsReferences = referenceCounter.searchReferences(for: objectCollector.collectObjects(from: files))
@@ -29,6 +29,8 @@ class NadeefProcessor {
 
         let arcDeallocator = ARCDeallocator()
         let unusedObjects = arcDeallocator.removeUnused(objects: &objectsReferences)
+        
+        objectsReferences.forEach({ print($0.object.name, "reference in ", $0.references.compactMap({$0.value?.name})) })
 
         unusedObjects.forEach({ print("\($0) IS UNUSED")})
         print("\(unusedObjects.count) UNUSED OBJECT")

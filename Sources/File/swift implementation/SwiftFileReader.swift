@@ -30,7 +30,6 @@ open class SwiftFileReader: FileReader {
             let line = String.init(cString:lineByteArrayPointer!)
             if !shouldIgnore(line: line) {
                 if blockCapture == nil, let blockMetadata = codeBlockMetaData(from: line) {
-                    print("NAAAME: \(blockMetadata.name)")
                     blockCapture = BlockCapture(metadata: blockMetadata)
                 }
                 blockCapture?.addLine(line)

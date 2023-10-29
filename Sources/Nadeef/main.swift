@@ -12,16 +12,6 @@ struct Nadeef: ParsableCommand {
     
     func run() throws {
         NadeefProcessor(configuration: NadeefConfiguration(path: path, logs: logs, roots: roots)).process()
-        let _ = Holder()
-    }
-    
-}
-
-// TODO: REMOVE THIS
-class Holder {
-    
-    init() {
-        let _ = Nadeef()
     }
 }
 
