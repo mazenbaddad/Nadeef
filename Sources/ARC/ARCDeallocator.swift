@@ -9,7 +9,7 @@ import Foundation
 
 class ARCDeallocator  {
     
-    func findUnused(objects: UnsafeMutablePointer<[ObjectReference]>) -> [String] {
+    func removeUnused(objects: UnsafeMutablePointer<[ObjectReference]>) -> [String] {
         var names: [String] = []
         var referenceChanged = false
         print("iteration ", objects.pointee.count)
@@ -22,7 +22,7 @@ class ARCDeallocator  {
         }
         objects.pointee.forEach({ $0.clearReferences() })
         if referenceChanged {
-            names += findUnused(objects: objects)
+            names += removeUnused(objects: objects)
         }
         return names
     }
