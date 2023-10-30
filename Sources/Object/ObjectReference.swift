@@ -9,18 +9,22 @@ import Foundation
 
 class ObjectReference {
     var object: Object
-    var references: [WeakBox<Object>] = []
+    private var _references: [WeakBox<Object>] = []
+    var references: [WeakBox<Object>] {
+        !object.systemObject ? _references : [WeakBox(value: systemObject)]
+    }
+    private lazy var systemObject = SystemObject()
     
     init(object: Object) {
         self.object = object
     }
     
     func add(reference: Object) {
-        references.append(WeakBox(value: reference))
+        _references.append(WeakBox(value: reference))
     }
     
     func clearReferences() {
-        references.removeAll(where: {$0.value == nil})
+        _references.removeAll(where: {$0.value == nil})
     }
 }
 
