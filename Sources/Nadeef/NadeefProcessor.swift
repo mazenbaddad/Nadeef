@@ -15,7 +15,7 @@ class NadeefProcessor {
         self.configuration = configuration
     }
     
-    func process() {
+    func process() throws {
         let fileSearcher = SwiftFileSearcher()
         let files = fileSearcher.startSearching(from: configuration.path)
         print("TOTAL FILES COUNT ", files.count)
@@ -24,7 +24,7 @@ class NadeefProcessor {
         let objectCollector = SwiftObjectCollector(fileReader: swiftFileReader, configuration: configuration)
         
         let referenceCounter = ReferenceCounter()
-        var objectsReferences = referenceCounter.searchReferences(for: objectCollector.collectObjects(from: files))
+        var objectsReferences = referenceCounter.searchReferences(for: try objectCollector.collectObjects(from: files))
         print("TOTAL OBJECTS COUNT ", objectsReferences.count)
 
         let arcDeallocator = ARCDeallocator()

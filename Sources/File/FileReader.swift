@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FileReader {
-    func read(file: File) -> Array<CodeBlock>
+    func read(file: File) throws -> Array<CodeBlock>
 }
 
 extension FileReader {
