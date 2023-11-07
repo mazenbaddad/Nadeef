@@ -9,7 +9,7 @@ import Foundation
 
 open class SwiftFileReader: FileReader {
     
-    func read(file: File) -> [CodeBlock] {
+    func read(file: File) throws -> [CodeBlock] {
         guard FileManager.default.fileExists(atPath: file.path) else {
             preconditionFailure("file expected at \(file.path) is missing")
         }
@@ -25,7 +25,7 @@ open class SwiftFileReader: FileReader {
         }
         var lineCap: Int = 0
         var bytesRead = getline(&lineByteArrayPointer, &lineCap, filePointer)
-        var lineNumber = 1
+        
         while (bytesRead > 0) {
             let line = String.init(cString:lineByteArrayPointer!)
             if !shouldIgnore(line: line) {
@@ -39,7 +39,9 @@ open class SwiftFileReader: FileReader {
                 }
             }
             bytesRead = getline(&lineByteArrayPointer, &lineCap, filePointer)
-            lineNumber += 1
+        }
+        if blockCapture != nil {
+            throw RuntimeError("\(file.name) contains an object that connot be captured, make sure this file is compilable and there's no extra open/close curly braces")
         }
         return codeBlocks
     }

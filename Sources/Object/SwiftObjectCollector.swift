@@ -17,10 +17,10 @@ class SwiftObjectCollector: ObjectCollector {
         self.configuration = configuration
     }
     
-    func collectObjects(from files: Array<File>) -> Array<Object> {
+    func collectObjects(from files: Array<File>) throws -> Array<Object> {
         var objects: [String: Object] = [:]
         for file in files {
-            for block in fileReader.read(file: file) {
+            for block in try fileReader.read(file: file) {
                 if objects[block.metadata.name] == nil {
                     objects[block.metadata.name] = SwiftObject(name: block.metadata.name, configuration: configuration)
                 }
