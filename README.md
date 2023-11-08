@@ -12,7 +12,7 @@
 ```bash
 swift build --configuration release
 ```
-4- copy the executable to the local binaries directory
+4- copy the executable to the local binary directory
 ```bash
 cp -f .build/release/nadeef /usr/local/bin
 ```
